@@ -33,17 +33,17 @@ fn main() {
     let r5 = uiua!(+ - x 1 v).as_vec().unwrap();
     println!("+ - x 1 v (x = 1000, v = [1, 2, 3]) = {:?}", r5);
 
-    // Using aliases for operators
     let r6 = uiua!(+ - : x 1 v);
     println!("+ - : x 1 v (x = 1000, v = [1, 2, 3]) = {:?}", r6);
 
-    // Alternative syntax for operators
+    // Spacing is not important as long as Rust can distinguish 
     let r7 = uiua!(+-:x 1 v).as_vec().unwrap();
     println!("+-:x 1 v (x = 1000, v = [1, 2, 3]) = {:?}", r7);
 
-    // Using a dot for multiplication
-    let r8 = uiua!(* . 25).as_num().unwrap();
-    println!("* . 25 = {:?}", r8);
+    // Combining operations to create more complex functions
+    // *. = ^2
+    let r8 = uiua!(*. 25).as_num().unwrap();
+    println!("*. 25 = {:?}", r8);
 
     // Handling error cases
     let r9 = uiua!(* 25).as_err().unwrap();
