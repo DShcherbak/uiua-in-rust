@@ -1,12 +1,11 @@
-
 mod elems;
 mod stack;
 mod uiua_macros;
 
-use stack::UiuaStack;
-use elems::UiuaElements;
 use elems::Convertable;
 use elems::Explain;
+use elems::UiuaElements;
+use stack::UiuaStack;
 
 macro_rules! build_one_ident {
     (+) => {
@@ -28,6 +27,9 @@ macro_rules! build_one_ident {
         UiuaElements::Mult
     };
     (:) => {
+        UiuaElements::DoubleColon
+    };
+    (;) => {
         UiuaElements::Semicolon
     };
     ($a:ident) => {
@@ -35,7 +37,7 @@ macro_rules! build_one_ident {
     };
     ($a:expr) => {
         UiuaElements::Elem($a)
-    }
+    };
 }
 
 macro_rules! build_uiua_stack {
@@ -47,7 +49,6 @@ macro_rules! build_uiua_stack {
 
     // Match and process an identifier.
     ($id:ident $($rest:tt)*) => {{
-    //  println!("Identifier: {}", stringify!($id));
         let c = build_one_ident!($id);
         let mut stack: UiuaStack = build_uiua_stack!($($rest)*);
         stack.chars.push(c);
@@ -56,7 +57,6 @@ macro_rules! build_uiua_stack {
 
     // Match and process a special symbol.
     ($sym:tt $($rest:tt)*) => {{
-    // println!("Special Symbol: <{}>", stringify!($sym));
         let c = build_one_ident!($sym);
         let mut stack: UiuaStack = build_uiua_stack!($($rest)*);
         stack.chars.push(c);
@@ -71,7 +71,6 @@ macro_rules! build_uiua_stack {
     }}
 }
 
-
 macro_rules! uiua {
     ($($x:tt)+) => {{
         let mut stack: UiuaStack = build_uiua_stack!($($x)+);
@@ -79,7 +78,6 @@ macro_rules! uiua {
         res
     }}
 }
-
 
 fn main() {
     // Basic arithmetic operations
@@ -110,7 +108,7 @@ fn main() {
     let r6 = uiua!(+ - : x 1 v);
     println!("+ - : x 1 v (x = 1000, v = [1, 2, 3]) = {:?}", r6);
 
-    // Spacing is not important as long as Rust can distinguish 
+    // Spacing is not important as long as Rust can distinguish
     let r7 = uiua!(+-:x 1 v).as_vec().unwrap();
     println!("+-:x 1 v (x = 1000, v = [1, 2, 3]) = {:?}", r7);
 
@@ -120,6 +118,6 @@ fn main() {
     println!("*. 25 = {:?}", r8);
 
     // Handling error cases
-    let r9 = uiua!(* 25).as_err().unwrap();
+    let r9 = uiua!(*25).as_err().unwrap();
     println!("* 25 = {:?}", r9);
 }

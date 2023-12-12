@@ -8,15 +8,15 @@ pub enum UiuaElements {
     Dot,
     Comma,
     Semicolon,
+    DoubleColon,
     Elem(i32),
     Vector(Vec<i32>),
-    Error(String)
+    Error(String),
 }
 
 pub trait Convertable {
     fn convert(&self) -> UiuaElements;
 }
-
 
 impl Convertable for i32 {
     fn convert(&self) -> UiuaElements {
@@ -40,23 +40,21 @@ impl Explain for UiuaElements {
     fn as_num(&self) -> Option<i32> {
         match &self {
             UiuaElements::Elem(x) => Some(*x),
-            _ => None
+            _ => None,
         }
     }
 
     fn as_err(&self) -> Option<String> {
         match &self {
             UiuaElements::Error(x) => Some(x.clone()),
-            _ => None
+            _ => None,
         }
     }
-    
+
     fn as_vec(&self) -> Option<Vec<i32>> {
         match &self {
             UiuaElements::Vector(x) => Some(x.clone()),
-            _ => None
+            _ => None,
         }
     }
-
-
 }
