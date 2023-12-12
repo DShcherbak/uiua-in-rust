@@ -116,7 +116,18 @@ impl UiuaStack {
                         }
                     },
                     UiuaElements::Semicolon => match reverse_stack.pop() {
-                        Some(lhs) => {}
+                        Some(_) => {}
+                        None => {
+                            return UiuaElements::Error(format!(
+                                "Not enough arguments for a function {:?}",
+                                elem.clone()
+                            ))
+                        }
+                    },
+                    UiuaElements::Id => match reverse_stack.pop() {
+                        Some(lhs) => {
+                            reverse_stack.push(lhs);
+                        }
                         None => {
                             return UiuaElements::Error(format!(
                                 "Not enough arguments for a function {:?}",

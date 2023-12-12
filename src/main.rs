@@ -32,6 +32,9 @@ macro_rules! build_one_ident {
     (;) => {
         UiuaElements::Semicolon
     };
+    ('∘') => {
+        UiuaElements::Id
+    };
     ($a:ident) => {
         ($a).convert()
     };

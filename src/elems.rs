@@ -9,6 +9,7 @@ pub enum UiuaElements {
     Comma,
     Semicolon,
     DoubleColon,
+    Id,
     Elem(i32),
     Vector(Vec<i32>),
     Error(String),
