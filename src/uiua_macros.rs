@@ -1,7 +1,4 @@
 
-use crate::stack::UiuaStack;
-use crate::elems::UiuaElements;
-
 macro_rules! build_one_ident {
     (+) => {
         UiuaElements::Plus
@@ -21,12 +18,21 @@ macro_rules! build_one_ident {
     (*) => {
         UiuaElements::Mult
     };
+    (:) => {
+        UiuaElements::DoubleColon
+    };
+    (;) => {
+        UiuaElements::Semicolon
+    };
+    ('∘') => {
+        UiuaElements::Id
+    };
     ($a:ident) => {
         ($a).convert()
     };
     ($a:expr) => {
         UiuaElements::Elem($a)
-    }
+    };
 }
 
 macro_rules! build_uiua_stack {
@@ -38,7 +44,6 @@ macro_rules! build_uiua_stack {
 
     // Match and process an identifier.
     ($id:ident $($rest:tt)*) => {{
-    //  println!("Identifier: {}", stringify!($id));
         let c = build_one_ident!($id);
         let mut stack: UiuaStack = build_uiua_stack!($($rest)*);
         stack.chars.push(c);
@@ -47,7 +52,6 @@ macro_rules! build_uiua_stack {
 
     // Match and process a special symbol.
     ($sym:tt $($rest:tt)*) => {{
-    // println!("Special Symbol: <{}>", stringify!($sym));
         let c = build_one_ident!($sym);
         let mut stack: UiuaStack = build_uiua_stack!($($rest)*);
         stack.chars.push(c);
@@ -62,7 +66,6 @@ macro_rules! build_uiua_stack {
     }}
 }
 
-
 macro_rules! uiua {
     ($($x:tt)+) => {{
         let mut stack: UiuaStack = build_uiua_stack!($($x)+);
@@ -70,4 +73,3 @@ macro_rules! uiua {
         res
     }}
 }
-
