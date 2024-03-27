@@ -3,6 +3,11 @@ name = "uiua-in-rust"
 version = "0.1.0"
 edition = "2021"
 
+# Specify that you're building a library
+[lib]
+name = "uiua_in_rust"
+path = "src/lib.rs"  # Path to your main library file
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

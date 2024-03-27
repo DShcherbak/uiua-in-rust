@@ -1,51 +1,25 @@
-
+#[macro_export]
 macro_rules! build_one_ident {
-    (+) => {
-        UiuaElements::Plus
-    };
-    (-) => {
-        UiuaElements::Minus
-    };
-    (.) => {
-        UiuaElements::Dot
-    };
-    (,) => {
-        UiuaElements::Comma
-    };
-    (/) => {
-        UiuaElements::Div
-    };
-    (*) => {
-        UiuaElements::Mult
-    };
-    (:) => {
-        UiuaElements::DoubleColon
-    };
-    (;) => {
-        UiuaElements::Semicolon
-    };
-    ('∘') => {
-        UiuaElements::Id
-    };
     ($a:ident) => {
         ($a).convert()
     };
     ($a:expr) => {
-        UiuaElements::Elem($a)
+        $crate::elems::UiuaElements::Elem($a)
     };
 }
 
+#[macro_export]
 macro_rules! build_uiua_stack {
     // Base case: If there are no more tokens, stop the recursion.
     () => {{
-        let u = UiuaStack { chars: vec![] };
+        let u = $crate::stack::UiuaStack { chars: vec![] };
         u
     }};
 
     // Match and process an identifier.
     ($id:ident $($rest:tt)*) => {{
         let c = build_one_ident!($id);
-        let mut stack: UiuaStack = build_uiua_stack!($($rest)*);
+        let mut stack: $crate::stack::UiuaStack = build_uiua_stack!($($rest)*);
         stack.chars.push(c);
         stack
     }};
@@ -53,22 +27,23 @@ macro_rules! build_uiua_stack {
     // Match and process a special symbol.
     ($sym:tt $($rest:tt)*) => {{
         let c = build_one_ident!($sym);
-        let mut stack: UiuaStack = build_uiua_stack!($($rest)*);
+        let mut stack: $crate::stack::UiuaStack = build_uiua_stack!($($rest)*);
         stack.chars.push(c);
         stack
     }};
 
     ($a:tt) => {{
         let c = build_one_ident!($a);
-        let mut u = UiuaStack { chars: vec![] };
+        let mut u = $crate::stack::UiuaStack { chars: vec![] };
         u.chars.push(c);
         u
     }}
 }
 
+#[macro_export]
 macro_rules! uiua {
     ($($x:tt)+) => {{
-        let mut stack: UiuaStack = build_uiua_stack!($($x)+);
+        let mut stack: $crate::stack::UiuaStack = build_uiua_stack!($($x)+);
         let res = stack.calc();
         res
     }}

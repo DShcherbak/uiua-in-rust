@@ -6,10 +6,10 @@ pub struct UiuaStack {
 
 pub fn get_binary(f: UiuaElements) -> (Box<dyn Fn(i32, i32) -> i32>, String) {
     match f {
-        UiuaElements::Plus => (Box::new(|x, y| x + y), "+".to_string()),
-        UiuaElements::Minus => (Box::new(|x, y| x - y), "-".to_string()),
-        UiuaElements::Mult => (Box::new(|x, y| x * y), "*".to_string()),
-        UiuaElements::Div => (Box::new(|x, y| x / y), "/".to_string()),
+        // UiuaElements::Plus => (Box::new(|x, y| x + y), "+".to_string()),
+        // UiuaElements::Minus => (Box::new(|x, y| x - y), "-".to_string()),
+        // UiuaElements::Mult => (Box::new(|x, y| x * y), "*".to_string()),
+        // UiuaElements::Div => (Box::new(|x, y| x / y), "/".to_string()),
         _ => todo!(),
     }
 }
@@ -59,103 +59,104 @@ impl UiuaStack {
                     UiuaElements::Vector(x) => {
                         reverse_stack.push(UiuaElements::Vector(x.clone()));
                     }
-                    UiuaElements::Plus
-                    | UiuaElements::Minus
-                    | UiuaElements::Mult
-                    | UiuaElements::Div => match reverse_stack.pop() {
-                        Some(lhs) => match reverse_stack.pop() {
-                            Some(rhs) => {
-                                let res = uiua_binary(lhs, rhs, elem.clone());
-                                reverse_stack.push(res);
-                            }
-                            None => {
-                                return UiuaElements::Error(format!(
-                                    "Not enough arguments for a function {:?}",
-                                    elem.clone()
-                                ))
-                            }
-                        },
-                        None => {
-                            return UiuaElements::Error(format!(
-                                "Not enough arguments for a function {:?}",
-                                elem.clone()
-                            ))
-                        }
-                    },
-                    UiuaElements::Dot => match reverse_stack.pop() {
-                        Some(rhs) => {
-                            reverse_stack.push(rhs.clone());
-                            reverse_stack.push(rhs);
-                        }
-                        None => {
-                            return UiuaElements::Error(format!(
-                                "Not enough arguments for a function {:?}",
-                                elem.clone()
-                            ))
-                        }
-                    },
-                    UiuaElements::Comma => match reverse_stack.pop() {
-                        Some(lhs) => match reverse_stack.pop() {
-                            Some(rhs) => {
-                                reverse_stack.push(rhs.clone());
-                                reverse_stack.push(lhs);
-                                reverse_stack.push(rhs);
-                            }
-                            None => {
-                                return UiuaElements::Error(format!(
-                                    "Not enough arguments for a function {:?}",
-                                    elem.clone()
-                                ))
-                            }
-                        },
-                        None => {
-                            return UiuaElements::Error(format!(
-                                "Not enough arguments for a function {:?}",
-                                elem.clone()
-                            ))
-                        }
-                    },
-                    UiuaElements::Semicolon => match reverse_stack.pop() {
-                        Some(_) => {}
-                        None => {
-                            return UiuaElements::Error(format!(
-                                "Not enough arguments for a function {:?}",
-                                elem.clone()
-                            ))
-                        }
-                    },
-                    UiuaElements::Id => match reverse_stack.pop() {
-                        Some(lhs) => {
-                            reverse_stack.push(lhs);
-                        }
-                        None => {
-                            return UiuaElements::Error(format!(
-                                "Not enough arguments for a function {:?}",
-                                elem.clone()
-                            ))
-                        }
-                    },
-                    UiuaElements::DoubleColon => match reverse_stack.pop() {
-                        Some(lhs) => match reverse_stack.pop() {
-                            Some(rhs) => {
-                                reverse_stack.push(lhs);
-                                reverse_stack.push(rhs);
-                            }
-                            None => {
-                                return UiuaElements::Error(format!(
-                                    "Not enough arguments for a function {:?}",
-                                    elem.clone()
-                                ))
-                            }
-                        },
-                        None => {
-                            return UiuaElements::Error(format!(
-                                "Not enough arguments for a function {:?}",
-                                elem.clone()
-                            ))
-                        }
-                    },
+                    // UiuaElements::Plus
+                    // | UiuaElements::Minus
+                    // | UiuaElements::Mult
+                    // | UiuaElements::Div => match reverse_stack.pop() {
+                    //     Some(lhs) => match reverse_stack.pop() {
+                    //         Some(rhs) => {
+                    //             let res = uiua_binary(lhs, rhs, elem.clone());
+                    //             reverse_stack.push(res);
+                    //         }
+                    //         None => {
+                    //             return UiuaElements::Error(format!(
+                    //                 "Not enough arguments for a function {:?}",
+                    //                 elem.clone()
+                    //             ))
+                    //         }
+                    //     },
+                    //     None => {
+                    //         return UiuaElements::Error(format!(
+                    //             "Not enough arguments for a function {:?}",
+                    //             elem.clone()
+                    //         ))
+                    //     }
+                    // },
+                    // UiuaElements::Dot => match reverse_stack.pop() {
+                    //     Some(rhs) => {
+                    //         reverse_stack.push(rhs.clone());
+                    //         reverse_stack.push(rhs);
+                    //     }
+                    //     None => {
+                    //         return UiuaElements::Error(format!(
+                    //             "Not enough arguments for a function {:?}",
+                    //             elem.clone()
+                    //         ))
+                    //     }
+                    // },
+                    // UiuaElements::Comma => match reverse_stack.pop() {
+                    //     Some(lhs) => match reverse_stack.pop() {
+                    //         Some(rhs) => {
+                    //             reverse_stack.push(rhs.clone());
+                    //             reverse_stack.push(lhs);
+                    //             reverse_stack.push(rhs);
+                    //         }
+                    //         None => {
+                    //             return UiuaElements::Error(format!(
+                    //                 "Not enough arguments for a function {:?}",
+                    //                 elem.clone()
+                    //             ))
+                    //         }
+                    //     },
+                    //     None => {
+                    //         return UiuaElements::Error(format!(
+                    //             "Not enough arguments for a function {:?}",
+                    //             elem.clone()
+                    //         ))
+                    //     }
+                    // },
+                    // UiuaElements::Semicolon => match reverse_stack.pop() {
+                    //     Some(_) => {}
+                    //     None => {
+                    //         return UiuaElements::Error(format!(
+                    //             "Not enough arguments for a function {:?}",
+                    //             elem.clone()
+                    //         ))
+                    //     }
+                    // },
+                    // UiuaElements::Id => match reverse_stack.pop() {
+                    //     Some(lhs) => {
+                    //         reverse_stack.push(lhs);
+                    //     }
+                    //     None => {
+                    //         return UiuaElements::Error(format!(
+                    //             "Not enough arguments for a function {:?}",
+                    //             elem.clone()
+                    //         ))
+                    //     }
+                    // },
+                    // UiuaElements::DoubleColon => match reverse_stack.pop() {
+                    //     Some(lhs) => match reverse_stack.pop() {
+                    //         Some(rhs) => {
+                    //             reverse_stack.push(lhs);
+                    //             reverse_stack.push(rhs);
+                    //         }
+                    //         None => {
+                    //             return UiuaElements::Error(format!(
+                    //                 "Not enough arguments for a function {:?}",
+                    //                 elem.clone()
+                    //             ))
+                    //         }
+                    //     },
+                    //     None => {
+                    //         return UiuaElements::Error(format!(
+                    //             "Not enough arguments for a function {:?}",
+                    //             elem.clone()
+                    //         ))
+                    //     }
+                    // },
                     UiuaElements::Error(msg) => return UiuaElements::Error(msg.clone()),
+                    _ => todo!()
                 }
             }
             self.chars = reverse_stack.iter().rev().cloned().collect();

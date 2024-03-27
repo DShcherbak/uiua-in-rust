@@ -1,15 +1,28 @@
 #[allow(dead_code)]
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum UiuaOperator {
+    StackManipulation,
+    MonadicAriphmethic,
+    DyadicAriphmetic,
+    MonadicArray,
+    DyadicArray,
+    MonadicModifier,
+    DyadicModifier
+    // Plus,
+    // Minus,
+    // Mult,
+    // Div,
+    // Dot,
+    // Comma,
+    // Semicolon,
+    // DoubleColon,
+    // Id,
+}
+
+#[allow(dead_code)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UiuaElements {
-    Plus,
-    Minus,
-    Mult,
-    Div,
-    Dot,
-    Comma,
-    Semicolon,
-    DoubleColon,
-    Id,
+    Operator(UiuaOperator),
     Elem(i32),
     Vector(Vec<i32>),
     Error(String),

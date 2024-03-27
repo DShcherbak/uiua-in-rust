@@ -2,10 +2,20 @@
 
 The uiua-in-rust library provides functionality to integrate the new Uiua programming language features seamlessly into Rust programs. The library offers specific macro that allows you to express computations in a concise and expressive manner, reminiscent of the Uiua language syntax.
 
+## Installation
+
+Clone this repo to your computer. In your Rust project, specify it as a local dependency: 
+
+```toml
+[dependencies]
+uiua-in-rust = { path = "../uiua-in-rust" }
+```
+
+
 ## Example usage
 
 ```rust
-use uiua_in_rust::uiua;
+use uiua_in_rust::*;
 
 fn main() {
     // Basic arithmetic operations
