@@ -1,22 +1,25 @@
 pub mod elems;
 pub mod stack;
 pub mod stack_manipulation;
+pub mod stack_calc;
+pub mod perform_stack_manipulation;
+pub use perform_stack_manipulation::perform;
 #[macro_use]
 pub mod uiua_macros;
 
-pub use elems::Explain;
+pub use elems::*;
+pub use stack_manipulation::*;
 
 
 #[cfg(test)]
-mod tests {
-    use crate::elems::UiuaElements;
+mod tests {    
 
     // Import necessary items from the parent module
     use super::*;
 
     #[test]
     fn test_uiua_macro() {
-        let result = uiua!(1);
+        let result = uiua!('◌':.1);
         assert_eq!(result, UiuaElements::Elem(1));
     }
 

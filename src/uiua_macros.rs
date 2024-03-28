@@ -1,5 +1,23 @@
 #[macro_export]
 macro_rules! build_one_ident {
+    // (+) => {
+    //     UiuaElements::Plus
+    // };
+    // (-) => {
+    //     UiuaElements::Minus
+    // };
+    (.)   => { dupl() };
+    (,)   => { over() };
+    (:)   => { flip() };
+    ('◌') => { pop() };
+    ('∘') => { id() };
+   
+    // (/) => {
+    //     UiuaElements::Div
+    // };
+    // (*) => {
+    //     UiuaElements::Mult
+    // };
     ($a:ident) => {
         ($a).convert()
     };
