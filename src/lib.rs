@@ -1,5 +1,6 @@
 pub mod elems;
 pub mod stack;
+pub mod stack_manipulation;
 #[macro_use]
 pub mod uiua_macros;
 

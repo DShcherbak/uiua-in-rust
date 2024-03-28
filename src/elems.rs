@@ -1,7 +1,9 @@
+use crate::stack_manipulation::StackManipulation;
+
 #[allow(dead_code)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UiuaOperator {
-    StackManipulation,
+    StackManipulation(StackManipulation),
     MonadicAriphmethic,
     DyadicAriphmetic,
     MonadicArray,
