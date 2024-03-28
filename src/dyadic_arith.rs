@@ -5,7 +5,8 @@ pub enum DyadicArithmetic {
     Add,
     Sub,
     Mult,
-    Div
+    Div,
+    Eq
 }
 
 getter_macro!{DyadicArithmetic}
@@ -14,3 +15,4 @@ getter_func!(add, Add);
 getter_func!(sub, Sub);
 getter_func!(mult, Mult);
 getter_func!(div, Div);
+getter_func!(eq, Eq);

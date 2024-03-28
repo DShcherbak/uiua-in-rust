@@ -6,8 +6,8 @@ impl UiuaStack {
         if self.chars.len() >= 2 {
             let mut reverse_stack: Vec<UiuaElements> = vec![];
             for elem in self.chars.iter() {
-                print!("Stack: {:?}", self);
-                print!("Reversed stack: {:?}", reverse_stack);
+              //  println!("Stack: {:?}", self);
+               // println!("Reversed stack: {:?}", reverse_stack);
                 match elem {
                     UiuaElements::Elem(x) => {
                         reverse_stack.push(UiuaElements::Elem(*x));
@@ -21,14 +21,28 @@ impl UiuaStack {
                             Ok(stack) => {reverse_stack = stack;}
                         }
                     }
+                    UiuaElements::Operator(UiuaOperator::MonadicAriphmethic) => {
+                        todo!()
+                    }
                     UiuaElements::Operator(UiuaOperator::DyadicArithmetic(oper)) => {
                         match oper.perform(reverse_stack) {
                             Err(e) => { return e; }
                             Ok(stack) => {reverse_stack = stack;}
                         }
-                    }                    
+                    }
+                    UiuaElements::Operator(UiuaOperator::MonadicModifier) => {
+                        todo!()
+                    }
+                    UiuaElements::Operator(UiuaOperator::DyadicModifier) => {
+                        todo!()
+                    }
+                    UiuaElements::Operator(UiuaOperator::MonadicArray) => {
+                        todo!()
+                    }
+                    UiuaElements::Operator(UiuaOperator::DyadicArray) => {
+                        todo!()
+                    }
                     UiuaElements::Error(msg) => return UiuaElements::Error(msg.clone()),
-                    _ => todo!()
                 }
             }
             self.chars = reverse_stack.iter().rev().cloned().collect();

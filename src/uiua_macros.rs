@@ -14,6 +14,7 @@ macro_rules! build_one_ident {
     (-) => { sub() };
     (*) => { mult() };
     (/) => { div() };
+    ('=') => { eq() };
 
     // elements
     ($a:ident) => {

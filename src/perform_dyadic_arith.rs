@@ -7,6 +7,7 @@ fn get_binary(f: &DyadicArithmetic) -> (Box<dyn Fn(i32, i32) -> i32>, String) {
         DyadicArithmetic::Sub => (Box::new(|x, y| x - y), "-".to_string()),
         DyadicArithmetic::Mult => (Box::new(|x, y| x * y), "*".to_string()),
         DyadicArithmetic::Div => (Box::new(|x, y| x / y), "/".to_string()),
+        DyadicArithmetic::Eq => (Box::new(|x, y| {if x == y { 1 } else {0} } ), "=".to_string())
     }
 }
 
