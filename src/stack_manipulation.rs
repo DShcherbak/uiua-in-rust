@@ -1,6 +1,5 @@
-use crate::{UiuaElements, UiuaOperator};
+use crate::{UiuaElements, UiuaOperator, getter_macro};
 
-#[allow(dead_code)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum StackManipulation {
     Duplicate,
@@ -10,22 +9,10 @@ pub enum StackManipulation {
     Id
 }
 
-pub fn dupl() -> UiuaElements {
-    UiuaElements::Operator(UiuaOperator::StackManipulation(StackManipulation::Duplicate))
-}
+getter_macro!{StackManipulation}
 
-pub fn over() -> UiuaElements {
-    UiuaElements::Operator(UiuaOperator::StackManipulation(StackManipulation::Over))
-}
-
-pub fn flip() -> UiuaElements {
-    UiuaElements::Operator(UiuaOperator::StackManipulation(StackManipulation::Flip))
-}
-
-pub fn pop() -> UiuaElements {
-    UiuaElements::Operator(UiuaOperator::StackManipulation(StackManipulation::Pop))
-}
-
-pub fn id() -> UiuaElements {
-    UiuaElements::Operator(UiuaOperator::StackManipulation(StackManipulation::Id))
-}
+getter_func!(dupl, Duplicate);
+getter_func!(over, Over);
+getter_func!(flip, Flip);
+getter_func!(pop, Pop);
+getter_func!(id, Id);

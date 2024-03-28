@@ -1,23 +1,21 @@
 #[macro_export]
 macro_rules! build_one_ident {
-    // (+) => {
-    //     UiuaElements::Plus
-    // };
-    // (-) => {
-    //     UiuaElements::Minus
-    // };
+    // Stack manipulation
     (.)   => { dupl() };
     (,)   => { over() };
     (:)   => { flip() };
     ('◌') => { pop() };
     ('∘') => { id() };
-   
-    // (/) => {
-    //     UiuaElements::Div
-    // };
-    // (*) => {
-    //     UiuaElements::Mult
-    // };
+
+    // Monadic aryphmetic
+
+    // Dyadic aryphmetic
+    (+) => { add() };
+    (-) => { sub() };
+    (*) => { mult() };
+    (/) => { div() };
+
+    // elements
     ($a:ident) => {
         ($a).convert()
     };

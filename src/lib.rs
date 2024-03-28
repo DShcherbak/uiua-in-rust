@@ -1,9 +1,12 @@
 pub mod elems;
 pub mod stack;
 pub mod stack_manipulation;
+pub mod perform;
+pub use perform::Performer;
+pub mod dyadic_arith;
 pub mod stack_calc;
 pub mod perform_stack_manipulation;
-pub use perform_stack_manipulation::perform;
+pub mod perform_dyadic_arith;
 #[macro_use]
 pub mod uiua_macros;
 

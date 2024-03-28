@@ -1,11 +1,25 @@
 use crate::stack_manipulation::StackManipulation;
+use crate::dyadic_arith::DyadicArithmetic;
+
+#[macro_export]
+macro_rules! getter_macro {
+    ($macro_name:ident) => {
+        macro_rules! getter_func {
+            ($func_name:ident, $enum_name:ident) => {
+                pub fn $func_name() -> UiuaElements{
+                    UiuaElements::Operator(UiuaOperator::$macro_name($macro_name::$enum_name))
+                }
+            }
+        }
+    };
+}
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UiuaOperator {
     StackManipulation(StackManipulation),
     MonadicAriphmethic,
-    DyadicAriphmetic,
+    DyadicArithmetic(DyadicArithmetic),
     MonadicArray,
     DyadicArray,
     MonadicModifier,
