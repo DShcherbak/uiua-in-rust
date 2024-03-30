@@ -36,8 +36,11 @@ impl UiuaStack {
                     UiuaElements::Operator(UiuaOperator::DyadicModifier) => {
                         todo!()
                     }
-                    UiuaElements::Operator(UiuaOperator::MonadicArray) => {
-                        todo!()
+                    UiuaElements::Operator(UiuaOperator::MonadicArray(oper)) => {
+                        match oper.perform(reverse_stack) {
+                            Err(e) => { return e; }
+                            Ok(stack) => {reverse_stack = stack;}
+                        }
                     }
                     UiuaElements::Operator(UiuaOperator::DyadicArray) => {
                         todo!()

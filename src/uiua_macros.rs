@@ -26,6 +26,10 @@ macro_rules! build_one_ident {
     ('↧') => { min() };
     ('↥') => { max() };
    // ('∠') => { atan() };
+
+   // Array
+   ('⧻') => ( lengt() );
+   ('⇡') => ( iota() );
     
     // elements
     ($a:ident) => {
