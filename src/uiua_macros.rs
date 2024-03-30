@@ -30,6 +30,9 @@ macro_rules! build_one_ident {
    // Array
    ('⧻') => ( lengt() );
    ('⇡') => ( iota() );
+
+   // Monadic modifiers
+   ('/') => ( reduce() );
     
     // elements
     ($a:ident) => {
@@ -44,7 +47,8 @@ macro_rules! build_one_ident {
 macro_rules! build_uiua_stack {
     // Base case: If there are no more tokens, stop the recursion.
     () => {{
-        let u = $crate::stack::UiuaStack { chars: vec![] };
+        use std::collections::HashMap;
+        let u = $crate::stack::UiuaStack { chars: vec![], applied: HashMap::new() };
         u
     }};
 
@@ -65,8 +69,9 @@ macro_rules! build_uiua_stack {
     }};
 
     ($a:tt) => {{
+        use std::collections::HashMap;
         let c = build_one_ident!($a);
-        let mut u = $crate::stack::UiuaStack { chars: vec![] };
+        let mut u = $crate::stack::UiuaStack { chars: vec![], applied: HashMap::new()};
         u.chars.push(c);
         u
     }}

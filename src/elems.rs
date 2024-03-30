@@ -1,6 +1,7 @@
 use crate::stack_manipulation::StackManipulation;
 use crate::dyadic_arith::DyadicArithmetic;
 use crate::MonadicArray;
+use crate::monadic_modifier::MonadicModifier;
 
 #[macro_export]
 macro_rules! getter_macro {
@@ -23,7 +24,8 @@ pub enum UiuaOperator {
     DyadicArithmetic(DyadicArithmetic),
     MonadicArray(MonadicArray),
     DyadicArray,
-    MonadicModifier,
+    MonadicModifier(MonadicModifier),
+    AppliedMonadicModifier(MonadicModifier, usize),//, Rc<dyn Fn(i32, i32) -> i32>),
     DyadicModifier
     // Plus,
     // Minus,
