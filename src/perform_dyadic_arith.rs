@@ -43,7 +43,7 @@ fn apply_uiua_binary(a: UiuaElements, b: UiuaElements, f: &DyadicArithmetic) -> 
             }
             UiuaElements::Vector(
                 lhs.iter()
-                    .zip(rhs.into_iter())
+                    .zip(rhs)
                     .map(|(x, y)| f(*x, y))
                     .collect(),
             )
@@ -74,9 +74,9 @@ fn get_vars_or_err(oper: &DyadicArithmetic, stack: &mut Vec<UiuaElements>) -> Re
 
 impl Performer for DyadicArithmetic {
     fn perform(&self, mut stack: Vec<UiuaElements>) -> Result<Vec<UiuaElements>, UiuaElements> {
-        match get_vars_or_err(&self, &mut stack) {
+        match get_vars_or_err(self, &mut stack) {
             Ok((lhs, rhs)) => {
-                stack.push(apply_uiua_binary(lhs, rhs, &self));
+                stack.push(apply_uiua_binary(lhs, rhs, self));
                 Ok(stack)
             }
             Err(e) => Err(e)

@@ -20,14 +20,14 @@ impl UiuaStack {
                     applied_id += 1;
                     next = false;
                 } else {
-                    return Some(UiuaElements::Error(format!("Some operator was not applied")));
+                    return Some(UiuaElements::Error("Some operator was not applied".to_string()));
                 }
                 continue;
             }
             new_stack.push(elem.clone());
         }
         if next {
-            return Some(UiuaElements::Error(format!("Some operator was not applied")));
+            return Some(UiuaElements::Error("Some operator was not applied".to_string()));
         }
         new_stack.reverse();
         self.chars = new_stack;
@@ -93,7 +93,7 @@ impl UiuaStack {
             }
             self.chars = reverse_stack.iter().rev().cloned().collect();
         }
-        match self.chars.get(0) {
+        match self.chars.first() {
             Some(val) => val.clone(),
             None => UiuaElements::Elem(0),
         }

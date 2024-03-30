@@ -12,7 +12,7 @@ impl Performer for MonadicArray {
                                 stack.push(UiuaElements::Elem(vec.len() as i32));
                                 Ok(stack)
                             }
-                            _ => Err(UiuaElements::Error(format!("Non-vector arg to length operation")))
+                            _ => Err(UiuaElements::Error("Non-vector arg to length operation".to_string()))
                         }
                     }
                     MonadicArray::Iota => {
@@ -21,7 +21,7 @@ impl Performer for MonadicArray {
                                 stack.push(UiuaElements::Vector((0..val).collect()));
                                 Ok(stack)
                             }
-                            _ => Err(UiuaElements::Error(format!("Non-scalar arg to range")))
+                            _ => Err(UiuaElements::Error("Non-scalar arg to range".to_string()))
                         }
                     }
                 }

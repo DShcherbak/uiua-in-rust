@@ -10,15 +10,15 @@ pub fn perform_modified(mut stack: Vec<UiuaElements>, oper: MonadicModifier, box
                 MonadicModifier::Reduce => {
                     match arg {
                         UiuaElements::Vector(vec) => {
-                            if vec.len() == 0 {
-                                return Err(UiuaElements::Error(format!("Empty array in reduce operation")))
+                            if vec.is_empty() {
+                                return Err(UiuaElements::Error("Empty array in reduce operation".to_string()))
                             }
-                            let first = *vec.get(0).unwrap();
+                            let first = *vec.first().unwrap();
                             let val = vec.iter().skip(1).fold(first, |x, &y| boxed(x, y));
                             stack.push(UiuaElements::Elem(val));
                             Ok(stack)
                         }
-                        _ => Err(UiuaElements::Error(format!("Non-vector arg to reduce operation")))
+                        _ => Err(UiuaElements::Error("Non-vector arg to reduce operation".to_string()))
                     }
                 }
             }
