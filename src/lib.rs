@@ -80,7 +80,7 @@ mod tests {
     let vv1 = vec![1, 20, 3, 4, 50];
     let vv2 = vec![10, 2, 30, 40, 5];
     let r10 = uiua!('↥' vv1 vv2).as_vec().unwrap();
-    assert_eq!(r10, vec![11, 20, 30, 40, 50]);
+    assert_eq!(r10, vec![10, 20, 30, 40, 50]);
 
 }
 
