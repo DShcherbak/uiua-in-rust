@@ -6,8 +6,20 @@ fn get_binary(f: &DyadicArithmetic) -> (Box<dyn Fn(i32, i32) -> i32>, String) {
         DyadicArithmetic::Add => (Box::new(|x, y| x + y), "+".to_string()),
         DyadicArithmetic::Sub => (Box::new(|x, y| x - y), "-".to_string()),
         DyadicArithmetic::Mult => (Box::new(|x, y| x * y), "*".to_string()),
-        DyadicArithmetic::Div => (Box::new(|x, y| x / y), "/".to_string()),
-        DyadicArithmetic::Eq => (Box::new(|x, y| {if x == y { 1 } else {0} } ), "=".to_string())
+        DyadicArithmetic::Div => (Box::new(|x, y| x / y), "÷".to_string()),
+        DyadicArithmetic::Eq => (Box::new(|x, y| {if x == y { 1 } else {0} } ), "=".to_string()),
+        DyadicArithmetic::Neq => (Box::new(|x, y| { if x == y { 0 } else {1} }), "≠".to_string()),
+        DyadicArithmetic::LT => (Box::new(|x, y| { if x < y { 1 } else {0} }), "<".to_string()),
+        DyadicArithmetic::GT => (Box::new(|x, y| { if x > y { 1 } else {0} }), ">".to_string()),
+        DyadicArithmetic::LET => (Box::new(|x, y| { if x >= y { 1 } else {0} }), "≤".to_string()),
+        DyadicArithmetic::GET => (Box::new(|x, y| {  if x <= y { 1 } else {0}}), "≥".to_string()),
+        DyadicArithmetic::Mod => (Box::new(|x, y| { x % y }), "◿".to_string()),
+        DyadicArithmetic::Exp => (Box::new(|x, y| { x.pow(y.try_into().unwrap()) }), "ⁿ".to_string()),
+      //  DyadicArithmetic::Log => (Box::new(|x, y| { log }), "ₙ".to_string()),
+        DyadicArithmetic::Min => (Box::new(|x, y| { if x < y { x } else { y } }), "↧".to_string()),
+        DyadicArithmetic::Max => (Box::new(|x, y| { if x > y { x } else { y } }), "↥".to_string()),
+        //DyadicArithmetic::Atan => (Box::new(|x, y| { x }), "∠".to_string()),
+
     }
 }
 

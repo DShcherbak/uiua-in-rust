@@ -74,9 +74,17 @@ mod tests {
     let r9 = uiua!(* 25).as_err().unwrap();
     println!("* 25 = {:?}", r9);
 
-        let result = uiua!(*+1 2 3);
-        assert_eq!(result, UiuaElements::Elem(9));
-    }
+    let result = uiua!(*+1 2 3);
+    assert_eq!(result, UiuaElements::Elem(9));
+
+    let vv1 = vec![1, 20, 3, 4, 50];
+    let vv2 = vec![10, 2, 30, 40, 5];
+    let r10 = uiua!('↥' vv1 vv2).as_vec().unwrap();
+    assert_eq!(r10, vec![11, 20, 30, 40, 50]);
+
+}
+
+
 
     // Add more tests as needed...
 }
