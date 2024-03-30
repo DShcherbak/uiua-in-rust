@@ -8,10 +8,12 @@ pub use perform::Performer;
 pub mod stack_manipulation;
 pub mod dyadic_arith;
 pub mod array;
+pub mod monadic_modifier;
 
 pub mod perform_stack_manipulation;
 pub mod perform_dyadic_arith;
 pub mod perform_array;
+pub mod perform_monadic_modifier;
 
 #[macro_use]
 pub mod uiua_macros;
@@ -20,6 +22,7 @@ pub use elems::*;
 pub use stack_manipulation::*;
 pub use dyadic_arith::*;
 pub use array::*;
+pub use monadic_modifier::*;
 
 
 #[cfg(test)]
@@ -87,8 +90,11 @@ mod tests {
 
     let test1 = vec![1, 2, 3, 4];
     let test2 = vec![2, 7, 1, 19, 19, 3];
-    let r11 = uiua!('ⁿ'2*'='0'◿'+1'⇡' . '⧻'. test1).as_vec().unwrap();
-    assert_eq!(r11, vec![1, 4, 0, 16]);
+    let r11 = uiua!('/'+'ⁿ'2*'='0'◿'+1'⇡' . '⧻'. test1).as_num().unwrap();
+    assert_eq!(r11, 21);
+
+    let r12 = uiua!('/'+'ⁿ'2*'='0'◿'+1'⇡' . '⧻'. test2).as_num().unwrap();
+    assert_eq!(r12, 63);
 
 }
 
